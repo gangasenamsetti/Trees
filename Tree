@@ -1,0 +1,5 @@
+**DFS-->depth first search
+  1.PREORDER-->ROOT,LEFT,RIGHT (1st)
+  2.INORDER--->LEFT,RIGHT,ROOT (2nd)
+  3.POSTORDER--->LEFT,RIGHT,ROOT (3rd)
+ 
