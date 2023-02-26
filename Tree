@@ -27,6 +27,7 @@ void preOrder(Node *root)
 }
 void lorder(Node *root,vector<vector<int>>&v,int l)
 {
+//l is level initially starts from 0
     if(root==NULL) return;
     if(v.size()==l) v.push_back({root->data});
     else v[l].push_back(root->data);
