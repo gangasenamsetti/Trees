@@ -3,3 +3,58 @@
   2.INORDER--->LEFT,ROOT,RIGHT (2nd)
   3.POSTORDER--->LEFT,RIGHT,ROOT (3rd)
  
+ 
+ **LEVEL ORDER TRAVERSAL(BFS)**
+ #include <bits/stdc++.h>
+using namespace std;
+class Node{
+    public:
+    int data;
+    Node *left;
+    Node *right;
+    Node(int val){
+        data=val;
+        left=right=NULL;
+    }
+};
+void preOrder(Node *root)
+{
+    if(root!=NULL){
+        cout<<root->data<<" ";
+        preOrder(root->left);
+        preOrder(root->right);
+    }
+}
+void lorder(Node *root,vector<vector<int>>&v,int l)
+{
+    if(root==NULL) return;
+    if(v.size()==l) v.push_back({root->data});
+    else v[l].push_back(root->data);
+    lorder(root->left,v,l+1);
+    lorder(root->right,v,l+1);
+}
+int main() {
+    vector<vector<int>>v;
+   Node *root=new Node(10);
+   Node *first=new Node(20);
+   root->left=first;
+   Node *second=new Node(30);
+   root->right=second;
+   Node *third=new Node(40);
+   root->left->left=third;
+   Node *fourth=new Node(50);
+   root->left->right=fourth;
+   preOrder(root);
+   cout<<"\n";
+   lorder(root,v,0);
+   for(auto it:v){
+        for(auto it2:it){
+            cout<<it2<<" ";
+        }
+    }
+
+    return 0;
+}
+o/p:
+10 20 40 50 30 
+10 20 30 40 50 
