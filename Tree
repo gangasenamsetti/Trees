@@ -2,8 +2,9 @@
   1.PREORDER-->ROOT,LEFT,RIGHT (1st)
   2.INORDER--->LEFT,ROOT,RIGHT (2nd)
   3.POSTORDER--->LEFT,RIGHT,ROOT (3rd)
+  
  
- 
+METHOD1:USING RECURSION 
  **LEVEL ORDER TRAVERSAL(BFS)**
  #include <bits/stdc++.h>
 using namespace std;
@@ -59,3 +60,69 @@ int main() {
 o/p:
 10 20 40 50 30 
 10 20 30 40 50 
+
+
+
+METHOD2:LEVEL ORDER TRAVERSAL USING QUEUES
+#include <bits/stdc++.h>
+using namespace std;
+class Node
+{
+    public:
+    int data;
+    Node *left;
+    Node *right;
+    Node(int val)
+    {
+        data=val;
+    }
+};
+void lorder(Node *root,vector<vector<int>>&ans)
+{
+    queue<Node*>q;
+    q.push(root);
+    while(!q.empty())
+    {
+        int n=q.size();
+        vector<int>temp;
+        for(int i=0;i<n;i++){
+            Node *curr=q.front();
+            temp.push_back(curr->data);
+            q.pop();
+            if(curr->left!=NULL) q.push(curr->left);
+            if(curr->right!=NULL) q.push(curr->right);
+        }
+        ans.push_back(temp);
+        
+    }
+    
+}
+
+int main() {
+    vector<vector<int>>ans;
+      Node *root=new Node(10);
+   Node *first=new Node(20);
+   root->left=first;
+   Node *second=new Node(30);
+   root->right=second;
+   Node *third=new Node(40);
+   root->left->left=third;
+   Node *fourth=new Node(50);
+   root->left->right=fourth;
+   Node *five=new Node(60);
+   root->right->left=five;
+   Node *six=new Node(70);
+   root->right->right=six;
+    lorder(root,ans);
+    for(int i=0;i<ans.size();i++){
+        for(int j=0;j<ans[i].size();j++){
+            cout<<ans[i][j]<<" ";
+        }
+        cout<<"\n";
+    }
+    return 0;
+}
+O/P:
+10 
+20 30 
+40 50 60 70 
